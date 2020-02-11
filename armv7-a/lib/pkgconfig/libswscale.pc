@@ -1,0 +1,14 @@
+prefix=/Users/tianpeng/sources/libs/armv7-a
+exec_prefix=${prefix}
+libdir=/Users/tianpeng/sources/libs/armv7-a/lib
+includedir=/Users/tianpeng/sources/libs/armv7-a/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 5.1.100
+Requires: 
+Requires.private: libavutil >= 56.14.100
+Conflicts:
+Libs: -L${libdir}  -lswscale 
+Libs.private: -lm
+Cflags: -I${includedir}
