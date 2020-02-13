@@ -5,6 +5,7 @@ extern "C" {
 
 #include "include/libavcodec/avcodec.h"
 #include "include/libavformat/avformat.h"
+#include "include/libavfilter/avfilter.h"
 #include "include/libavutil/avutil.h"
 
 jstring JNICALL
@@ -45,6 +46,62 @@ jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avcodecInfo(
         temp = temp->next;
     }
 
+    return env->NewStringUTF(info);
+}
+
+jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avfilterInfo(
+        JNIEnv *env,
+        jobject) {
+    char info[40000] = {0};
+    avfilter_register_all();
+
+    AVFilter *temp = (AVFilter *)avfilter_next(NULL);
+    while(temp != NULL) {
+        sprintf(info, "%s%s\n", info, temp->name);
+        temp = temp->next;
+    }
+    return env->NewStringUTF(info);
+}
+
+jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avformatInfo(
+        JNIEnv *env,
+        jobject) {
+    char info[40000] = {0};
+
+    av_register_all();
+
+    AVInputFormat *i_temp = av_iformat_next(NULL);
+    AVOutputFormat *o_temp = av_oformat_next(NULL);
+    while (i_temp != NULL) {
+        sprintf(info, "%sInput: %s\n", info, i_temp->name);
+        i_temp = i_temp->next;
+    }
+    while (o_temp != NULL) {
+        sprintf(info, "%sOutput: %s\n", info, o_temp->name);
+        o_temp = o_temp->next;
+    }
+    return env->NewStringUTF(info);
+}
+
+jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_protocolInfo(
+        JNIEnv *env,
+        jobject) {
+    char info[40000] = {0};
+    av_register_all();
+
+    struct URLProtocol *pup = NULL;
+
+    struct URLProtocol **p_temp = &pup;
+    avio_enum_protocols((void **) p_temp, 0);
+
+    while ((*p_temp) != NULL) {
+        sprintf(info, "%sInput: %s\n", info, avio_enum_protocols((void **) p_temp, 0));
+    }
+    pup = NULL;
+    avio_enum_protocols((void **) p_temp, 1);
+    while ((*p_temp) != NULL) {
+        sprintf(info, "%sInput: %s\n", info, avio_enum_protocols((void **) p_temp, 1));
+    }
     return env->NewStringUTF(info);
 }
 }

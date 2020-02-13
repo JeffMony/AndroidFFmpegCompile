@@ -3,11 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/ffmpeg_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/avcodec_btn"
+            android:textSize="10sp"
+            android:text="avcodec"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/avformat_btn"
+            android:textSize="10sp"
+            android:text="avformat"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/avfilter_btn"
+            android:textSize="10sp"
+            android:text="avfilter"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/protocol_btn"
+            android:textSize="10sp"
+            android:text="protocol"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:scrollbars="vertical"
         android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_centerInParent="true" />
+        android:layout_below="@+id/ffmpeg_layout"
+        android:text="Hello World!" />
 
 </RelativeLayout>
