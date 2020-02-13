@@ -45,4 +45,7 @@ SLIB_INSTALL_LINKS='$(SLIBNAME)'
 
 #### 将x264 编译进FFmpeg 库
 1. 将x264/android 文件夹拷贝到 ffmpeg/x264 文件夹下
-2. 修改 ffmpeg 编译脚本,
+2. 修改 ffmpeg 编译脚本<br>
+  执行 ./build_android_ffmpeg_x264.sh all 可以编译所有平台的so<br>
+  执行 ./build_android_ffmpeg_x264.sh armv7 可以编译armeabi-v7a so<br>
+  执行 ./build_android_ffmpeg_x264.sh armv8 可以编译arm64-v8a so<br>
