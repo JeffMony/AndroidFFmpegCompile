@@ -2,6 +2,7 @@
 CPU=armv7-a
 API=24
 ARCH=arm
+X264=$(pwd)/x264/$CPU
 PLATFORM=arm-linux-androideabi
 SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
 CROSS_PREFIX=$NDK_ROOT/toolchains/$PLATFORM-4.9/prebuilt/linux-x86_64/bin/$PLATFORM-
@@ -22,6 +23,7 @@ echo "开始编译ffmpeg $CPU so"
 --disable-symver \
 --enable-neon \
 --enable-shared \
+--enable-libx264 \
 --enable-gpl \
 --enable-pic \
 --enable-jni \
@@ -33,6 +35,7 @@ echo "开始编译ffmpeg $CPU so"
 --enable-encoder=libmp3lame \
 --enable-encoder=libwavpack \
 --enable-encoder=mpeg4 \
+--enable-encoder=libx264 \
 --enable-encoder=pcm_s16le \
 --enable-encoder=png \
 --enable-encoder=srt \
@@ -63,7 +66,9 @@ echo "开始编译ffmpeg $CPU so"
 --cross-prefix=$CROSS_PREFIX \
 --target-os=android \
 --arch=$ARCH \
---sysroot=$SYSROOT
+--sysroot=$SYSROOT \
+--extra-cflags="-I$X264/include -fPIE -pie" \
+--extra-ldflags="-L$X264/lib"
 
 make clean
 make -j4
