@@ -4,14 +4,10 @@ export NDK_ROOT=/home/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk
 if [ $# -eq 1 ];then
   case $1 in
     "armv7")
-      sh build_android_ffmpeg_armv7.sh
+      sh build_android_armv7.sh
       ;;
     "armv8")
-      sh build_android_ffmpeg_armv8.sh
-      ;;
-    "all")
-      sh build_android_ffmpeg_armv7.sh
-      sh build_android_ffmpeg_armv8.sh
+      sh build_android_armv8.sh
       ;;
     *)
       echo "You should input the correct args."
