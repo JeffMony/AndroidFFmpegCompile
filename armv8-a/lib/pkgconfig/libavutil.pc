@@ -1,7 +1,7 @@
-prefix=/Users/tianpeng/sources/libs/armv8-a
+prefix=/home/jeffmony/sources/git/ffmpeg/android/armv8-a
 exec_prefix=${prefix}
-libdir=/Users/tianpeng/sources/libs/armv8-a/lib
-includedir=/Users/tianpeng/sources/libs/armv8-a/include
+libdir=/home/jeffmony/sources/git/ffmpeg/android/armv8-a/lib
+includedir=/home/jeffmony/sources/git/ffmpeg/android/armv8-a/include
 
 Name: libavutil
 Description: FFmpeg utility library

@@ -1,13 +1,13 @@
-prefix=/Users/tianpeng/sources/libs/armv7-a
+prefix=/home/jeffmony/sources/git/ffmpeg/android/armv7-a
 exec_prefix=${prefix}
-libdir=/Users/tianpeng/sources/libs/armv7-a/lib
-includedir=/Users/tianpeng/sources/libs/armv7-a/include
+libdir=/home/jeffmony/sources/git/ffmpeg/android/armv7-a/lib
+includedir=/home/jeffmony/sources/git/ffmpeg/android/armv7-a/include
 
 Name: libavformat
 Description: FFmpeg container format library
 Version: 58.12.100
 Requires: 
-Requires.private: libavcodec >= 58.18.100, libswresample >= 3.1.100, libavutil >= 56.14.100
+Requires.private: libavcodec >= 58.18.100, libavutil >= 56.14.100
 Conflicts:
 Libs: -L${libdir}  -lavformat 
 Libs.private: -lm -lz

@@ -3,12 +3,12 @@ exec_prefix=${prefix}
 libdir=/home/jeffmony/sources/git/ffmpeg/android/armv7-a/lib
 includedir=/home/jeffmony/sources/git/ffmpeg/android/armv7-a/include
 
-Name: libavcodec
-Description: FFmpeg codec library
-Version: 58.18.100
+Name: libpostproc
+Description: FFmpeg postprocessing library
+Version: 55.1.100
 Requires: 
 Requires.private: libavutil >= 56.14.100
 Conflicts:
-Libs: -L${libdir}  -lavcodec 
-Libs.private: -pthread -lm -lz
+Libs: -L${libdir}  -lpostproc 
+Libs.private: -lm
 Cflags: -I${includedir}
