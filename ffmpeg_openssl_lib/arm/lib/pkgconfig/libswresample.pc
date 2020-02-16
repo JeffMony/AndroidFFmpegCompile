@@ -1,0 +1,14 @@
+prefix=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/openssl/arm
+exec_prefix=${prefix}
+libdir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/openssl/arm/lib
+includedir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/openssl/arm/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 3.1.100
+Requires: 
+Requires.private: libavutil >= 56.14.100
+Conflicts:
+Libs: -L${libdir}  -lswresample 
+Libs.private: -lm
+Cflags: -I${includedir}
