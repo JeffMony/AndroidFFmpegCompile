@@ -10,26 +10,21 @@ CROSS_PREFIX=$NDK_ROOT/toolchains/$PLATFORM-4.9/prebuilt/darwin-x86_64/bin/$PLAT
 PREFIX=$(pwd)/android/$ARCH #自己指定一个输出目录
 rm -rf $(pwd)/android/$ARCH
 
-echo "开始编译ffmpeg $ARCH so"
+if [ "$ARCH" == "arm" ];
+then
+    HOST=arm-linux
+elif [ "$ARCH" == "arm64" ];
+then
+    HOST=aarch64-linux
+fi
+
 ./configure \
 --prefix=$PREFIX \
---disable-doc \
---enable-shared \
---disable-static \
---disable-x86asm \
+--host=$HOST \
+--enable-pic \
 --disable-asm \
---disable-symver \
---disable-devices \
---disable-avdevice \
---enable-gpl \
---disable-ffmpeg \
---disable-ffplay \
---disable-ffprobe \
---enable-small \
---enable-cross-compile \
+--enable-static \
 --cross-prefix=$CROSS_PREFIX \
---target-os=android \
---arch=$ARCH \
 --sysroot=$SYSROOT
 }
 
@@ -39,13 +34,8 @@ make clean
 make -j4
 make install
 
-echo "完成ffmpeg $ARCH 编译..."
-
-
 # build armv8a
 build arm64 aarch64-linux-android
 make clean
 make -j4
 make install
-
-echo "完成ffmpeg $ARCH 编译..."
