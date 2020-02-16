@@ -1,0 +1,14 @@
+prefix=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/x264/arm
+exec_prefix=${prefix}
+libdir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/x264/arm/lib
+includedir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/x264/arm/include
+
+Name: libpostproc
+Description: FFmpeg postprocessing library
+Version: 55.1.100
+Requires: 
+Requires.private: libavutil >= 56.14.100
+Conflicts:
+Libs: -L${libdir}  -lpostproc 
+Libs.private: -lm
+Cflags: -I${includedir}
