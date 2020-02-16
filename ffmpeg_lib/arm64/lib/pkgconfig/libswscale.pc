@@ -1,0 +1,14 @@
+prefix=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/arm64
+exec_prefix=${prefix}
+libdir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/arm64/lib
+includedir=/Users/tianpeng/sources/AndroidFFmpegCompile/ffmpeg/android/arm64/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 5.1.100
+Requires: 
+Requires.private: libavutil >= 56.14.100
+Conflicts:
+Libs: -L${libdir}  -lswscale 
+Libs.private: -lm
+Cflags: -I${includedir}
