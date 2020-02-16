@@ -1,3 +1,5 @@
+欢迎访问站点：[ffmpeg 开源项目分析(一)ffmpeg/openssl/x264编译](https://www.jianshu.com/p/f292a6575d58)
+
 做音视频开发，ffmpeg是绕不过去的开源库，我们要在Android 平台上运行ffmpeg，需要编译一个ffmpeg 动态库；
 #### 1.编译环境
 ffmpeg源码：https://git.ffmpeg.org/ffmpeg.git
