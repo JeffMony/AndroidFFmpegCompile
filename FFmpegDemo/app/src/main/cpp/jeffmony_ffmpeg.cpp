@@ -7,18 +7,27 @@ extern "C" {
 #include "include/libavformat/avformat.h"
 #include "include/libavfilter/avfilter.h"
 #include "include/libavutil/avutil.h"
+}
 
-jstring JNICALL
-Java_com_android_ffmpegdemo_MainActivity_stringFromJNI(
-        JNIEnv *env,
-        jobject /* this */) {
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, jstring input_path,
+                                                   jstring output_path) {
+    const char *input_path_arr = env->GetStringUTFChars(input_path, nullptr);
+    const char *output_path_arr = env->GetStringUTFChars(output_path, nullptr);
+    av_log(NULL, AV_LOG_WARNING, "Input path=%s, Output path=%s", input_path_arr, output_path_arr);
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_android_ffmpegdemo_FFmpegInfoUtils_stringFromJNI(JNIEnv *env, jclass clazz) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
 
-jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avcodecInfo(
-        JNIEnv *env,
-        jobject) {
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_android_ffmpegdemo_FFmpegInfoUtils_avcodecInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
 
     av_register_all();
@@ -49,9 +58,9 @@ jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avcodecInfo(
     return env->NewStringUTF(info);
 }
 
-jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avfilterInfo(
-        JNIEnv *env,
-        jobject) {
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_android_ffmpegdemo_FFmpegInfoUtils_avfilterInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
     avfilter_register_all();
 
@@ -63,9 +72,9 @@ jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avfilterInfo(
     return env->NewStringUTF(info);
 }
 
-jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avformatInfo(
-        JNIEnv *env,
-        jobject) {
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_android_ffmpegdemo_FFmpegInfoUtils_avformatInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
 
     av_register_all();
@@ -83,9 +92,9 @@ jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_avformatInfo(
     return env->NewStringUTF(info);
 }
 
-jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_protocolInfo(
-        JNIEnv *env,
-        jobject) {
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_android_ffmpegdemo_FFmpegInfoUtils_protocolInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
     av_register_all();
 
@@ -103,5 +112,4 @@ jstring JNICALL Java_com_android_ffmpegdemo_MainActivity_protocolInfo(
         sprintf(info, "%sInput: %s\n", info, avio_enum_protocols((void **) p_temp, 1));
     }
     return env->NewStringUTF(info);
-}
 }

@@ -10,18 +10,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-        System.loadLibrary("avcodec");
-        System.loadLibrary("avfilter");
-        System.loadLibrary("avformat");
-        System.loadLibrary("avutil");
-        System.loadLibrary("postproc");
-        System.loadLibrary("swresample");
-        System.loadLibrary("swscale");
-    }
-
     private Button mAvcodecBtn;
     private Button mAvformatBtn;
     private Button mAvfilterBtn;
@@ -39,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAvfilterBtn = (Button) findViewById(R.id.avfilter_btn);
         mProtocolBtn = (Button) findViewById(R.id.protocol_btn);
 
-        mInfoText.setText(avcodecInfo());
+        mInfoText.setText(FFmpegInfoUtils.avcodecInfo());
         mInfoText.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         mAvcodecBtn.setOnClickListener(this);
@@ -51,13 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mAvcodecBtn) {
-            mInfoText.setText(avcodecInfo());
+            mInfoText.setText(FFmpegInfoUtils.avcodecInfo());
         } else if (v == mAvformatBtn) {
-            mInfoText.setText(avformatInfo());
+            mInfoText.setText(FFmpegInfoUtils.avformatInfo());
         } else if (v == mAvfilterBtn) {
-            mInfoText.setText(avfilterInfo());
+            mInfoText.setText(FFmpegInfoUtils.avfilterInfo());
         } else if (v == mProtocolBtn) {
-            mInfoText.setText(protocolInfo());
+            mInfoText.setText(FFmpegInfoUtils.protocolInfo());
         }
     }
 
@@ -65,10 +53,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
-    public native String avcodecInfo();
-    public native String avfilterInfo();
-    public native String avformatInfo();
-    public native String protocolInfo();
-
 }
