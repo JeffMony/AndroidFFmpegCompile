@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     new Thread(new Runnable() {
       @Override
       public void run() {
-        android.util.Log.e("litianpeng", "####");
         FFmpegRemuxUtils.remux(inputPath, outputPath);
       }
     }).start();

@@ -106,6 +106,8 @@
 
 #include "libavutil/avassert.h"
 
+#include "android_log.h"
+
 const char program_name[] = "ffmpeg";
 const int program_birth_year = 2000;
 
@@ -4795,6 +4797,15 @@ int main(int argc, char **argv)
 
     av_log_set_flags(AV_LOG_SKIP_REPEATED);
     parse_loglevel(argc, argv, options);
+
+    if(use_log_report)
+    {
+        av_log_set_callback(ffp_log_callback_report);
+    }
+    else
+    {
+        av_log_set_callback(ffp_log_callback_brief);
+    }
 
     if(argc>1 && !strcmp(argv[1], "-d")){
         run_as_daemon=1;

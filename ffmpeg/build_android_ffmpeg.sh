@@ -1,5 +1,5 @@
 #!/bin/bash
-export NDK_ROOT=/Users/tianpeng/tools/android-ndk-r14b # 修改自己本地的ndk路径
+export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
 
 build() {
 API=24

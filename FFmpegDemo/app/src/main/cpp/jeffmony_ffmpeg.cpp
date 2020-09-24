@@ -9,6 +9,7 @@ extern "C" {
 #include "include/libavutil/avutil.h"
 #include "libavutil/timestamp.h"
 #include "libavutil/mathematics.h"
+#include "android_log.h"
 #include <android/log.h>
 
 #ifndef LOG_TAG
@@ -25,6 +26,14 @@ extern "C"
 JNIEXPORT int JNICALL
 Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, jstring input_path,
                                                    jstring output_path) {
+    if(use_log_report)
+    {
+        av_log_set_callback(ffp_log_callback_report);
+    }
+    else
+    {
+        av_log_set_callback(ffp_log_callback_brief);
+    }
     const char *in_filename = env->GetStringUTFChars(input_path, 0);
     const char *out_filename = env->GetStringUTFChars(output_path, 0);
     LOGI("Input_path=%s, Output_path=%s", in_filename, out_filename);
@@ -48,14 +57,15 @@ Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, js
 
     LOGI("Index=%d, duration=%lld",ifmt_ctx->nb_streams, ifmt_ctx->duration);
 
-    av_dump_format(ifmt_ctx, 0, in_filename, 0);
+    av_dump_format(ifmt_ctx, 1, in_filename, 0);
 
-    avformat_alloc_output_context2(&ofmt_ctx, NULL, "mp4", out_filename);
+    avformat_alloc_output_context2(&ofmt_ctx, NULL, NULL, out_filename);
     if (!ofmt_ctx) {
         LOGE("Could not create output context\n");
         ret = AVERROR_UNKNOWN;
         goto end;
     }
+    LOGI("Output format=%s", ofmt_ctx->oformat->name);
 
     stream_mapping_size = ifmt_ctx->nb_streams;
     stream_mapping = (int *)av_mallocz_array(stream_mapping_size, sizeof(*stream_mapping));
@@ -70,6 +80,8 @@ Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, js
         AVStream *out_stream;
         AVStream *in_stream = ifmt_ctx->streams[i];
         AVCodecParameters *in_codecpar = in_stream->codecpar;
+
+        LOGI("width=%d, heigth=%d", in_codecpar->width, in_codecpar->height);
 
         if (in_codecpar->codec_type != AVMEDIA_TYPE_AUDIO &&
             in_codecpar->codec_type != AVMEDIA_TYPE_VIDEO &&
@@ -93,6 +105,11 @@ Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, js
             goto end;
         }
         out_stream->codecpar->codec_tag = 0;
+        if (in_codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+            out_stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO;
+            out_stream->codecpar->width = 1280;
+            out_stream->codecpar->height = 720;
+        }
     }
     av_dump_format(ofmt_ctx, 0, out_filename, 1);
 
