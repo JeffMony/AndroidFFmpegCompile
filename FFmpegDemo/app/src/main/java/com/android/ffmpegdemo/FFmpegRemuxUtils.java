@@ -4,7 +4,7 @@ public class FFmpegRemuxUtils {
 
   // Used to load the 'native-lib' library on application startup.
   static {
-    System.loadLibrary("native-lib");
+    System.loadLibrary("jeffmpeg");
     System.loadLibrary("avcodec");
     System.loadLibrary("avfilter");
     System.loadLibrary("avformat");
@@ -14,5 +14,5 @@ public class FFmpegRemuxUtils {
     System.loadLibrary("swscale");
   }
 
-  public static native void remux(String inputPath, String outputPath);
+  public static native int remux(String inputPath, String outputPath);
 }

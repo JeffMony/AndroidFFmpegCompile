@@ -1,56 +1,51 @@
 package com.android.ffmpegdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button mAvcodecBtn;
-    private Button mAvformatBtn;
-    private Button mAvfilterBtn;
-    private Button mProtocolBtn;
-    private TextView mInfoText;
+  private Button mFFmpegInfoBtn;
+  private Button mRemuxBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mInfoText = (TextView) findViewById(R.id.sample_text);
-        mAvcodecBtn = (Button) findViewById(R.id.avcodec_btn);
-        mAvformatBtn = (Button) findViewById(R.id.avformat_btn);
-        mAvfilterBtn = (Button) findViewById(R.id.avfilter_btn);
-        mProtocolBtn = (Button) findViewById(R.id.protocol_btn);
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        mInfoText.setText(FFmpegInfoUtils.avcodecInfo());
-        mInfoText.setMovementMethod(ScrollingMovementMethod.getInstance());
+    mFFmpegInfoBtn = findViewById(R.id.ffmpeg_info_btn);
+    mRemuxBtn = findViewById(R.id.remux_btn);
 
-        mAvcodecBtn.setOnClickListener(this);
-        mAvformatBtn.setOnClickListener(this);
-        mAvfilterBtn.setOnClickListener(this);
-        mProtocolBtn.setOnClickListener(this);
+    mFFmpegInfoBtn.setOnClickListener(this);
+    mRemuxBtn.setOnClickListener(this);
+    File rootFile = new File(this.getApplicationContext().getExternalFilesDir("Video"), "Remux");
+  }
+
+  private void remuxVideo(final String inputPath, final String outputPath) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        android.util.Log.e("litianpeng", "####");
+        FFmpegRemuxUtils.remux(inputPath, outputPath);
+      }
+    }).start();
+  }
+
+  @Override
+  public void onClick(View v) {
+    if (v == mFFmpegInfoBtn) {
+      Intent intent = new Intent(this, FFmpegInfoActivity.class);
+      startActivity(intent);
+    } else if (v == mRemuxBtn) {
+      remuxVideo(Constants.INPUT_FILE_PATH, Constants.OUTPUT_FILE_PATH);
     }
-
-    @Override
-    public void onClick(View v) {
-        if (v == mAvcodecBtn) {
-            mInfoText.setText(FFmpegInfoUtils.avcodecInfo());
-        } else if (v == mAvformatBtn) {
-            mInfoText.setText(FFmpegInfoUtils.avformatInfo());
-        } else if (v == mAvfilterBtn) {
-            mInfoText.setText(FFmpegInfoUtils.avfilterInfo());
-        } else if (v == mProtocolBtn) {
-            mInfoText.setText(FFmpegInfoUtils.protocolInfo());
-        }
-    }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
+  }
 }
