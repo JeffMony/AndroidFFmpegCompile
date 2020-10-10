@@ -1,4 +1,4 @@
-package com.android.ffmpegdemo;
+package com.jeffmony.ffmpeglib;
 
 public class FFmpegRemuxUtils {
 

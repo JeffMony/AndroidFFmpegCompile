@@ -2,7 +2,6 @@
 #include <string>
 
 extern "C" {
-
 #include "include/libavcodec/avcodec.h"
 #include "include/libavformat/avformat.h"
 #include "include/libavfilter/avfilter.h"
@@ -10,21 +9,11 @@ extern "C" {
 #include "libavutil/timestamp.h"
 #include "libavutil/mathematics.h"
 #include "android_log.h"
-#include <android/log.h>
-
-#ifndef LOG_TAG
-#define LOG_TAG "FFmpegDemo"
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG ,__VA_ARGS__) // 定义LOGD类型
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG ,__VA_ARGS__) // 定义LOGI类型
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG ,__VA_ARGS__) // 定义LOGW类型
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG ,__VA_ARGS__) // 定义LOGE类型
-#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,LOG_TAG ,__VA_ARGS__) // 定义LOGF类型
-#endif
 }
 
 extern "C"
 JNIEXPORT int JNICALL
-Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, jstring input_path,
+Java_com_jeffmony_ffmpeglib_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, jstring input_path,
                                                    jstring output_path) {
     if(use_log_report)
     {
@@ -186,14 +175,14 @@ Java_com_android_ffmpegdemo_FFmpegRemuxUtils_remux(JNIEnv *env, jclass clazz, js
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_android_ffmpegdemo_FFmpegInfoUtils_stringFromJNI(JNIEnv *env, jclass clazz) {
+Java_com_jeffmony_ffmpeglib_FFmpegInfoUtils_stringFromJNI(JNIEnv *env, jclass clazz) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_android_ffmpegdemo_FFmpegInfoUtils_avcodecInfo(JNIEnv *env, jclass clazz) {
+Java_com_jeffmony_ffmpeglib_FFmpegInfoUtils_avcodecInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
 
     av_register_all();
@@ -226,7 +215,7 @@ Java_com_android_ffmpegdemo_FFmpegInfoUtils_avcodecInfo(JNIEnv *env, jclass claz
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_android_ffmpegdemo_FFmpegInfoUtils_avfilterInfo(JNIEnv *env, jclass clazz) {
+Java_com_jeffmony_ffmpeglib_FFmpegInfoUtils_avfilterInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
     avfilter_register_all();
 
@@ -240,7 +229,7 @@ Java_com_android_ffmpegdemo_FFmpegInfoUtils_avfilterInfo(JNIEnv *env, jclass cla
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_android_ffmpegdemo_FFmpegInfoUtils_avformatInfo(JNIEnv *env, jclass clazz) {
+Java_com_jeffmony_ffmpeglib_FFmpegInfoUtils_avformatInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
 
     av_register_all();
@@ -260,7 +249,7 @@ Java_com_android_ffmpegdemo_FFmpegInfoUtils_avformatInfo(JNIEnv *env, jclass cla
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_android_ffmpegdemo_FFmpegInfoUtils_protocolInfo(JNIEnv *env, jclass clazz) {
+Java_com_jeffmony_ffmpeglib_FFmpegInfoUtils_protocolInfo(JNIEnv *env, jclass clazz) {
     char info[40000] = {0};
     av_register_all();
 

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.jeffmony.ffmpeglib.FFmpegInfoUtils;
+
 public class FFmpegInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mAvcodecBtn;

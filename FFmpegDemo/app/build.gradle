@@ -9,13 +9,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
-        externalNativeBuild {
-            cmake {
-                cppFlags "-fexceptions"
-                abiFilters "armeabi-v7a","arm64-v8a"
-            }
-        }
     }
     buildTypes {
         release {
@@ -23,15 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation project(':ffmpeglib')
 }
