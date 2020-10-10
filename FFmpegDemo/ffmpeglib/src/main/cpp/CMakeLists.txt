@@ -41,13 +41,15 @@ include_directories(./include)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-        jeffmpeg
+        jeffmony
 
         # Sets the library as a shared library.
         SHARED
 
+        ffmpeg_info.cpp
+
         # Provides a relative path to your source file(s).
-        jeffmony_ffmpeg.cpp)
+        ffmpeg_remux.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -67,7 +69,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-        jeffmpeg
+        jeffmony
         libavcodec
         libavfilter
         libavformat

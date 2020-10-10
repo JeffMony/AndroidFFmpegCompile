@@ -4,7 +4,7 @@ public class FFmpegInfoUtils {
 
   // Used to load the 'native-lib' library on application startup.
   static {
-    System.loadLibrary("jeffmpeg");
+    System.loadLibrary("jeffmony");
     System.loadLibrary("avcodec");
     System.loadLibrary("avfilter");
     System.loadLibrary("avformat");

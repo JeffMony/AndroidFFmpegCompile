@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <EditText
+            android:id="@+id/src_path_txt"
+            android:hint="请输入原文件"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <Button
+            android:id="@+id/convert_btn"
+            android:layout_gravity="center"
+            android:text="转变封装格式"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+        
+        <EditText
+            android:id="@+id/dest_path_txt"
+            android:hint="请输出目标文件"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+    </LinearLayout>
+
+</RelativeLayout>

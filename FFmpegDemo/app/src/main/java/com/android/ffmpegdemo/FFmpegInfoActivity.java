@@ -23,11 +23,11 @@ public class FFmpegInfoActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ffmpeg_info);
 
-        mInfoText = (TextView) findViewById(R.id.sample_text);
-        mAvcodecBtn = (Button) findViewById(R.id.avcodec_btn);
-        mAvformatBtn = (Button) findViewById(R.id.avformat_btn);
-        mAvfilterBtn = (Button) findViewById(R.id.avfilter_btn);
-        mProtocolBtn = (Button) findViewById(R.id.protocol_btn);
+        mInfoText = findViewById(R.id.sample_text);
+        mAvcodecBtn = findViewById(R.id.avcodec_btn);
+        mAvformatBtn = findViewById(R.id.avformat_btn);
+        mAvfilterBtn = findViewById(R.id.avfilter_btn);
+        mProtocolBtn = findViewById(R.id.protocol_btn);
 
         mInfoText.setText(FFmpegInfoUtils.avcodecInfo());
         mInfoText.setMovementMethod(ScrollingMovementMethod.getInstance());

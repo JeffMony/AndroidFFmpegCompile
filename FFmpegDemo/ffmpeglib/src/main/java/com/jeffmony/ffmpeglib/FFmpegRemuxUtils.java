@@ -2,9 +2,8 @@ package com.jeffmony.ffmpeglib;
 
 public class FFmpegRemuxUtils {
 
-  // Used to load the 'native-lib' library on application startup.
   static {
-    System.loadLibrary("jeffmpeg");
+    System.loadLibrary("jeffmony");
     System.loadLibrary("avcodec");
     System.loadLibrary("avfilter");
     System.loadLibrary("avformat");

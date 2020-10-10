@@ -8,15 +8,10 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jeffmony.ffmpeglib.FFmpegRemuxUtils;
-
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
   private Button mFFmpegInfoBtn;
   private Button mRemuxBtn;
-
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,16 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     mFFmpegInfoBtn.setOnClickListener(this);
     mRemuxBtn.setOnClickListener(this);
-    File rootFile = new File(this.getApplicationContext().getExternalFilesDir("Video"), "Remux");
-  }
-
-  private void remuxVideo(final String inputPath, final String outputPath) {
-    new Thread(new Runnable() {
-      @Override
-      public void run() {
-        FFmpegRemuxUtils.remux(inputPath, outputPath);
-      }
-    }).start();
   }
 
   @Override
@@ -46,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
       Intent intent = new Intent(this, FFmpegInfoActivity.class);
       startActivity(intent);
     } else if (v == mRemuxBtn) {
-      remuxVideo(Constants.INPUT_FILE_PATH, Constants.OUTPUT_FILE_PATH);
+      Intent intent = new Intent(this, FFmpegRemuxActivity.class);
+      startActivity(intent);
     }
   }
 }
