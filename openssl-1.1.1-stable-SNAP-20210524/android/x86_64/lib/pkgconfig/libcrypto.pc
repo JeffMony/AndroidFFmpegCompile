@@ -1,0 +1,12 @@
+prefix=/Users/jeffmony/sources/AndroidFFmpegCompile/openssl-1.1.1-stable-SNAP-20210524/android/x86_64
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+enginesdir=${libdir}/engines-1.1
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 1.1.1l-dev
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl -pthread 
+Cflags: -I${includedir}

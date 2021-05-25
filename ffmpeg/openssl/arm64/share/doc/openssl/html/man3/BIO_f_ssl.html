@@ -4,10 +4,10 @@
 <head>
 <title>BIO_f_ssl</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:_securityagent@osx374.sd.apple.com" />
+<link rev="made" href="mailto:root@osx355.sd.apple.com" />
 </head>
 
-<body style="background-color: white">
+<body>
 
 
 
@@ -143,11 +143,6 @@
  out = BIO_new_fp(stdout, BIO_NOCLOSE);
  if (BIO_do_connect(sbio) &lt;= 0) {
      fprintf(stderr, &quot;Error connecting to server\n&quot;);
-     ERR_print_errors_fp(stderr);
-     exit(1);
- }
- if (BIO_do_handshake(sbio) &lt;= 0) {
-     fprintf(stderr, &quot;Error establishing SSL connection\n&quot;);
      ERR_print_errors_fp(stderr);
      exit(1);
  }

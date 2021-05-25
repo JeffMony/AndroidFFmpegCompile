@@ -4,10 +4,10 @@
 <head>
 <title>BIO_push</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:_securityagent@osx374.sd.apple.com" />
+<link rev="made" href="mailto:root@osx355.sd.apple.com" />
 </head>
 
-<body style="background-color: white">
+<body>
 
 
 
@@ -70,7 +70,7 @@
 
 <p>the new chain is <b>md1-md2-b64-f</b>. Data written to <b>md1</b> will be digested by <b>md1</b> and <b>md2</b>, <b>base64</b> encoded and written to <b>f</b>.</p>
 
-<p>It should be noted that reading causes data to pass in the reverse direction, that is data is read from <b>f</b>, base64 <b>decoded</b> and digested by <b>md1</b> and <b>md2</b>. If the call:</p>
+<p>It should be noted that reading causes data to pass in the reverse direction, that is data is read from <b>f</b>, <b>base64</b> decoded and digested by <b>md2</b> and <b>md1</b>. If the call:</p>
 
 <pre><code> BIO_pop(md2);</code></pre>
 
