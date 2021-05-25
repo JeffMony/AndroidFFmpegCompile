@@ -1,5 +1,5 @@
 #!/bin/bash
-export NDK_ROOT=/Users/tianpeng/tools/android-ndk-r14b # 修改自己本地的ndk路径
+export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
 
 build() {
 API=24
@@ -38,20 +38,27 @@ echo "开始编译ffmpeg $ARCH so"
 --extra-ldflags="-L$OPENSSL/lib"
 }
 
-# build armv7a
-build arm arm-linux-androideabi
+# build arm arm-linux-androideabi
+# make clean
+# make -j4
+# make install
+# echo "完成ffmpeg $ARCH 编译..."
+
+# build arm64 aarch64-linux-android
+# make clean
+# make -j4
+# make install
+# echo "完成ffmpeg $ARCH 编译..."
+
+build x86 x86
+make clean
+make -j4
+make install
+echo "完成ffmpeg $ARCH 编译..."
+
+build x86_64 x86_64
 make clean
 make -j4
 make install
 
-echo "完成ffmpeg $ARCH 编译..."
-
-
-# build armv8a
-build arm64 aarch64-linux-android
-make clean
-make -j4
-make install
-
-echo "完成ffmpeg $ARCH 编译..."
 
