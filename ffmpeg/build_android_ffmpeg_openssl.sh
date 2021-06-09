@@ -1,15 +1,25 @@
 #!/bin/bash
-export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
+
+# PLATFORM -----> MAC   LINUX
+COMPILE_PLATFORM="LINUX"
 
 build_arm() {
 API=24
 ARCH=$1
 PLATFORM=$2
-OPENSSL=$(pwd)/openssl/$ARCH
-SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
-CROSS_PREFIX=$NDK_ROOT/toolchains/$PLATFORM-4.9/prebuilt/darwin-x86_64/bin/$PLATFORM-
-PREFIX=$(pwd)/android/openssl/$ARCH #自己指定一个输出目录
-rm -rf $(pwd)/android/openssl/$ARCH
+OPENSSL=$(pwd)/openssl_lib/$ARCH
+if [ "$COMPILE_PLATFORM" == "MAC" ]
+then
+    export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
+    SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
+    CROSS_PREFIX=$NDK_ROOT/toolchains/$PLATFORM-4.9/prebuilt/darwin-x86_64/bin/$PLATFORM-
+else
+    export NDK_ROOT=/home/jeffmony/developer/android-ndk-r14b/android-ndk-r14b # 修改自己本地的ndk路径
+    SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
+    CROSS_PREFIX=$NDK_ROOT/toolchains/$PLATFORM-4.9/prebuilt/linux-x86_64/bin/$PLATFORM-
+fi
+PREFIX=$(pwd)/android/openssl_lib/$ARCH #自己指定一个输出目录
+rm -rf $(pwd)/android/openssl_lib/$ARCH
 
 echo "开始编译ffmpeg $ARCH so"
 ./configure \
@@ -54,11 +64,19 @@ build_x86() {
 API=24
 ARCH=$1
 PLATFORM=$2
-OPENSSL=$(pwd)/openssl/$ARCH
-SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
-CROSS_PREFIX=$NDK_ROOT/toolchains/$ARCH-4.9/prebuilt/darwin-x86_64/bin/$PLATFORM-
-PREFIX=$(pwd)/android/openssl/$ARCH #自己指定一个输出目录
-rm -rf $(pwd)/android/openssl/$ARCH
+OPENSSL=$(pwd)/openssl_lib/$ARCH
+if [ "$COMPILE_PLATFORM" == "MAC" ]
+then
+    export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
+    SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
+    CROSS_PREFIX=$NDK_ROOT/toolchains/$ARCH-4.9/prebuilt/darwin-x86_64/bin/$PLATFORM-
+else
+    export NDK_ROOT=/home/jeffmony/developer/android-ndk-r14b/android-ndk-r14b # 修改自己本地的ndk路径
+    SYSROOT=$NDK_ROOT/platforms/android-$API/arch-$ARCH/
+    CROSS_PREFIX=$NDK_ROOT/toolchains/$ARCH-4.9/prebuilt/linux-x86_64/bin/$PLATFORM-
+fi
+PREFIX=$(pwd)/android/openssl_lib/$ARCH #自己指定一个输出目录
+rm -rf $(pwd)/android/openssl_lib/$ARCH
 
 echo "开始编译ffmpeg $ARCH so"
 ./configure \
