@@ -1,9 +1,0 @@
-prefix=/Users/tianpeng/sources/CustomPlayer/third_library/openssl/android/arm
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include
-
-Name: OpenSSL
-Description: Secure Sockets Layer and cryptography libraries and tools
-Version: 1.1.1e-dev
-Requires: libssl libcrypto
