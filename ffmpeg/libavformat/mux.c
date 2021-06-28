@@ -618,7 +618,7 @@ static int compute_muxer_pkt_fields(AVFormatContext *s, AVStream *st, AVPacket *
         ((!(s->oformat->flags & AVFMT_TS_NONSTRICT) &&
           st->codecpar->codec_type != AVMEDIA_TYPE_SUBTITLE &&
           st->codecpar->codec_type != AVMEDIA_TYPE_DATA &&
-          st->cur_dts >= pkt->dts) || st->cur_dts > pkt->dts)) {
+          st->cur_dts >= pkt->dts))) {
         av_log(s, AV_LOG_ERROR,
                "Application provided invalid, non monotonically increasing dts to muxer in stream %d: %s >= %s\n",
                st->index, av_ts2str(st->cur_dts), av_ts2str(pkt->dts));
@@ -812,8 +812,7 @@ static int prepare_input_packet(AVFormatContext *s, AVPacket *pkt)
         /* check that the dts are increasing (or at least non-decreasing,
          * if the format allows it */
         if (st->cur_dts != AV_NOPTS_VALUE &&
-            ((!(s->oformat->flags & AVFMT_TS_NONSTRICT) && st->cur_dts >= pkt->dts) ||
-             st->cur_dts > pkt->dts)) {
+            ((!(s->oformat->flags & AVFMT_TS_NONSTRICT) && st->cur_dts >= pkt->dts)) {
             av_log(s, AV_LOG_ERROR,
                    "Application provided invalid, non monotonically increasing "
                    "dts to muxer in stream %d: %" PRId64 " >= %" PRId64 "\n",
