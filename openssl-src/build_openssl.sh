@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PLATFORM -----> MAC   LINUX
-COMPILE_PLATFORM="LINUX"
+COMPILE_PLATFORM="MAC"
 
 build() {
 API=24
@@ -11,7 +11,7 @@ make clean
 rm -rf $(pwd)/android/$CPU
 if [ "$COMPILE_PLATFORM" == "MAC" ]
 then
-    export NDK_ROOT=/Users/jeffmony/tools/android-ndk-r14b # 修改自己本地的ndk路径
+    export NDK_ROOT=/Users/jeffli/tools/android-ndk-r14b # 修改自己本地的ndk路径
     export ANDROID_NDK_HOME=$NDK_ROOT
     PATH=$ANDROID_NDK_HOME/toolchains/$PLATFORM-4.9/prebuilt/darwin-x86_64/bin:$PATH
 else

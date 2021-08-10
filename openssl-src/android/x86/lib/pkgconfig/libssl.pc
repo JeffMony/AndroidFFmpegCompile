@@ -1,4 +1,4 @@
-prefix=/home/jeffmony/github/AndroidFFmpegCompile/openssl-1.1.1-stable-SNAP-20210524/android/x86
+prefix=/Users/jeffli/github/AndroidFFmpegCompile/openssl-src/android/x86
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
